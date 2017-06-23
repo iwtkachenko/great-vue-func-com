@@ -1,16 +1,27 @@
+// @flow
 
-import wrap from 'great-vue-hoc-helper';
+// Copyright (c) 2017 by Igor Tkachenko <vash.igor@gmail.com>. All Rights Reserved.
+// This code is provided under the MIT license.
+// You can find the full text in the package you get this file with.
 
+/* eslint-disable import/no-extraneous-dependencies */
+import Vue from 'vue';
+/* eslint-enable import/no-extraneous-dependencies */
 
-export interface Options {
+import get from 'lodash.get';
+
+import { castMetadata, destroyMetadata } from 'great-vue-hoc-helper';
+
+/**
+ * Types that are used in the module.
+ */
+export interface Options<T> {
   // Inject props values into the child component
-  injectProps?: (props: any, self?: any, options?: Options, metadata?: any) => any,
+  injectProps?: (props: T, self?: Vue, options?: Options<T>, metadata?: any) => T,
   // Prepare vue vm render data object
-  prepareData?: (self: any, options?: Options) => any,
+  prepareData?: (self: Vue, options?: Options<T>) => any,
   // Additional props definitions
-  props?: any,
-  // If you want to render decorator rendere youself, you can use this property
-  render?: (h: any, payload?: RenderPayload) => any,
+  props?: T,
   // This object has to have shape of Vue component options
   options?: any,
   /**
@@ -24,44 +35,52 @@ export interface Options {
   metadata?: any,
 }
 
-// @TODO Deprecate in hoc-helper
-export type RenderFunction = (h: any, payload?: RenderPayload) => any
+/**
+ * Types that are used in the module.
+ */
+export interface RenderPayload<T> {
+  self: Vue,
+  props?: T,
+  metadata?: any,
+}
+
+export type RenderFunction<T> = (
+  h: any,
+  props?: T,
+  children: Vue[],
+  payload?: RenderPayload<T>
+) => any
 
 
-export default (options: Options = {}) => (com: RenderFunction) => {
-  const injectedOptions = get(options, 'options', {});
-
-  // @TODO Import mixins creating function
-  const mixins = [
-    ...(options.options && options.options.mixins ? options.options.mixins : []),
-    {
-      created() {
-        this.$hocMetadata = castMetadata(this, options).metadata;
-      },
-
-      destroyed() {
-        destroyMetadata(this, options);
-      },
-    },
-  ];
-
-  // We can transform some function to component instead of wrapping one.
-  return Vue.extend({
-    ...injectedOptions,
+/**
+ * Module export.
+ * This function generate Vue component from render functions.
+ */
+export default <T>(options: Options<T> = {}) => (com: RenderFunction<T>) =>
+  Vue.extend({
+    ...get(options, 'options', {}),
 
     name: 'great-func-com',
 
     props: options.props ? options.props : {},
 
-    mixins,
+    mixins: [
+      ...(options.options && options.options.mixins ? options.options.mixins : []),
+      {
+        created() {
+          this.$hocMetadata = castMetadata(this, options).metadata;
+        },
+
+        destroyed() {
+          destroyMetadata(this, options);
+        },
+      },
+    ],
 
     render(h) {
-      return com(h, {
-        props: this.$props,
-        children: this.$children,
+      return com(h, this.$props, this.$children, {
         self: this,
         ...castMetadata(this, options),
       });
     },
   });
-}

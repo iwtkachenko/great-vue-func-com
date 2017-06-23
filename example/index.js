@@ -8,9 +8,10 @@ import Vue from 'vue'; // eslint-disable-line import/no-extraneous-dependencies
 
 import create from '../module/index';
 
-const MyComp = create({ props: { value: {} } })
-((h, { props }) => (<div>{props.value}</div>))
+const MyComp = create({ props: { value: {} } })(
+  (h, { value }) => (<div>{value}</div>),
+);
 
 /* eslint-disable no-new */
-new Vue({ el: '#example-app', render: h => (<MyComp value={1}/>) });
+new Vue({ el: '#example-app', render: h => (<MyComp value={1} />) });
 /* eslint-enable no-new */
