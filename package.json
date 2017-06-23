@@ -20,9 +20,9 @@
   "author": "Igor Tkachenko",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/vashigor/great-vue-func-com/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/vashigor/great-vue-func-com",
   "scripts": {
     "lint": "eslint ./",
     "start": "webpack-dev-server --config example.webpack.babel.js",
