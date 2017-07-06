@@ -2004,9 +2004,9 @@ graceful-fs@~3.0.2:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
 
-great-vue-hoc-helper@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/great-vue-hoc-helper/-/great-vue-hoc-helper-0.3.1.tgz#85f0266445eabfcb8f2d7d3b9a0493ec6b5690fd"
+great-vue-hoc-helper@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/great-vue-hoc-helper/-/great-vue-hoc-helper-1.0.0.tgz#28c773ac891cda144c296b7a1616273cdf3e0c56"
   dependencies:
     lodash.assign "^4.2.0"
     lodash.get "^4.4.2"
