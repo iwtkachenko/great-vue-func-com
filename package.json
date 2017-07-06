@@ -1,6 +1,6 @@
 {
   "name": "great-vue-func-com",
-  "version": "0.0.1-alpha.0",
+  "version": "0.1.0",
   "description": "Helper for Vue js, that creates components from render functions.",
   "main": "dist/index.js",
   "module": "dist/index.js",
