@@ -35,9 +35,6 @@ export interface Options<T> {
   metadata?: any,
 }
 
-/**
- * Types that are used in the module.
- */
 export interface RenderPayload<T> {
   self: Vue,
   props?: T,
@@ -56,7 +53,7 @@ export type RenderFunction<T> = (
  * Module export.
  * This function generate Vue component from render functions.
  */
-export default <T>(options: Options<T> = {}) => (com: RenderFunction<T>) =>
+export default <T>(options: Options<T> = {}) => (com: RenderFunction<T>): typeof Vue =>
   Vue.extend({
     ...get(options, 'options', {}),
 
@@ -72,7 +69,7 @@ export default <T>(options: Options<T> = {}) => (com: RenderFunction<T>) =>
         },
 
         destroyed() {
-          destroyMetadata(this, options);
+          destroyMetadata(this);
         },
       },
     ],

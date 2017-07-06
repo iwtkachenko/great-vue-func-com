@@ -9,7 +9,7 @@ import Vue from 'vue'; // eslint-disable-line import/no-extraneous-dependencies
 import create from '../module/index';
 
 const MyComp = create({ props: { value: {} } })(
-  (h, { value }) => (<div>{value}</div>),
+  (h, { value }) => <div>{value}</div>,
 );
 
 /* eslint-disable no-new */

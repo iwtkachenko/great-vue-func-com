@@ -56,7 +56,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "great-vue-hoc-helper": "^0.2.0",
+    "great-vue-hoc-helper": "^0.3.1",
     "lodash.get": "^4.4.2"
   }
 }

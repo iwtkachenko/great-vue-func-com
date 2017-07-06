@@ -37,11 +37,6 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 /**
  * Types that are used in the module.
  */
-
-
-/**
- * Types that are used in the module.
- */
 exports.default = function () {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return function (com) {
@@ -56,7 +51,7 @@ exports.default = function () {
           this.$hocMetadata = (0, _greatVueHocHelper.castMetadata)(this, options).metadata;
         },
         destroyed: function destroyed() {
-          (0, _greatVueHocHelper.destroyMetadata)(this, options);
+          (0, _greatVueHocHelper.destroyMetadata)(this);
         }
       }]),
 
